@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unicahiccpmp.alumnos.TransaccionController">
+   <children>
+      <Label alignment="CENTER" prefHeight="29.0" prefWidth="602.0" text="Transacciones de Monedas" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label prefHeight="25.0" prefWidth="66.0" text="Monto" />
+      <TextField fx:id="mntoOrigen" onInputMethodTextChanged="#mntoOrigen_change" />
+      <ComboBox fx:id="cbOrigen" prefHeight="25.0" prefWidth="604.0" />
+      <Label prefHeight="26.0" prefWidth="55.0" text="Resultado" />
+      <TextField fx:id="mntoResultado" />
+      <ComboBox fx:id="cmbResultado" prefHeight="25.0" prefWidth="604.0" />
+      <Separator prefHeight="0.0" prefWidth="600.0" />
+   </children>
+   <padding>
+      <Insets bottom="21.0" left="21.0" right="21.0" top="21.0" />
+   </padding>
+</VBox>
