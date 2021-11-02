@@ -106,6 +106,4 @@ public class Alumnos {
     private SimpleStringProperty correo;
     private SimpleStringProperty telefono;
     
-   
-    
 }

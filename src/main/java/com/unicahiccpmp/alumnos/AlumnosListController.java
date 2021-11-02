@@ -5,6 +5,8 @@
  */
 package com.unicahiccpmp.alumnos;
 
+import com.unicahiccpmp.dao.AlumnosDao;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -44,15 +46,17 @@ public class AlumnosListController implements Initializable {
     private Button btnMostrar;
     @FXML
     private Button btnEliminar;
+    
+    private AlumnosDao AlumnosModel;
     /**
      * Initializes the controller class.
      */
-        private ObservableList<Alumnos> dataset = FXCollections.emptyObservableList();
+    private ObservableList<Alumnos> dataset;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         clmCuenta.setCellValueFactory(
-                new PropertyValueFactory<Alumnos, String>("cuenta")
+                new PropertyValueFactory<>("cuenta")
         );
         clmNombre.setCellValueFactory(
                  new PropertyValueFactory<>("nombre")
@@ -66,24 +70,11 @@ public class AlumnosListController implements Initializable {
         clmTelefono.setCellValueFactory(
                 new PropertyValueFactory<>("telefono")
         );
-        
-        Alumnos a1 = new Alumnos();
-        a1.setCuenta("1");
-        a1.setNombre("Nombre");
-        a1.setTelefono("22222222");
-        a1.setGenero("Masculino");
-        a1.setCorreo("unCorreo@unicah.edu");
-        //tblAlumnos.
-        tblAlumnos.getItems().add(a1);
-        
-        Alumnos a2 = new Alumnos();
-        a2.setCuenta("2");
-        a2.setNombre("Nombre 2");
-        a2.setTelefono("22222222");
-        a2.setGenero("Femenino");
-        a2.setCorreo("unCorreo@unicah.edu");
-        //tblAlumnos.
-        tblAlumnos.getItems().add(a2);
+       this.AlumnosModel = new AlumnosDao();
+       this.AlumnosModel.tableInitialize();
+       
+       dataset = FXCollections.observableArrayList(AlumnosModel.getAlumnoItems(true));
+       tblAlumnos.getItems().addAll(dataset);
     }    
     
 }
