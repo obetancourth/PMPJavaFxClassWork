@@ -6,11 +6,13 @@
 package com.unicahiccpmp.alumnos;
 
 import com.unicahiccpmp.dao.AlumnosDao;
+import java.io.IOException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -76,5 +78,26 @@ public class AlumnosListController implements Initializable {
        dataset = FXCollections.observableArrayList(AlumnosModel.getAlumnoItems(true));
        tblAlumnos.getItems().addAll(dataset);
     }    
+
+    @FXML
+    private void new_onclick(ActionEvent event) {
+        try {
+            App.loadFXMLModal("alumnosForm");
+        } catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void edit_onclick(ActionEvent event) {
+    }
+
+    @FXML
+    private void display_onclick(ActionEvent event) {
+    }
+
+    @FXML
+    private void delete_onclick(ActionEvent event) {
+    }
     
 }
