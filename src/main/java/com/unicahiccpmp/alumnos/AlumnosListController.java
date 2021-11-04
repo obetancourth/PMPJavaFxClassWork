@@ -14,7 +14,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.control.Button;
@@ -82,7 +84,40 @@ public class AlumnosListController implements Initializable {
     @FXML
     private void new_onclick(ActionEvent event) {
         try {
-            App.loadFXMLModal("alumnosForm");
+            FXMLLoader fxmlLoader = App.getFXMLLoader("alumnosForm");
+            Parent scene = fxmlLoader.load();
+            AlumnosFormController sceneController = (AlumnosFormController) fxmlLoader.getController();
+            //seteamos los parametros.
+            sceneController.setMode("new");
+            sceneController.setVIEW();
+            App.loadFXMLModal(scene);
+            this.updateTable();
+        } catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    private void updateTable(){
+       tblAlumnos.getItems().clear();
+       dataset = FXCollections.observableArrayList(AlumnosModel.getAlumnoItems(true));
+       tblAlumnos.getItems().addAll(dataset);
+    }
+    
+    private void updateForm(String mode){
+        Alumnos selectedAlumno = tblAlumnos.getSelectionModel().getSelectedItem();
+        String cuenta = selectedAlumno.getCuenta();
+        try {
+            FXMLLoader fxmlLoader = App.getFXMLLoader("alumnosForm");
+            Parent scene = fxmlLoader.load();
+            AlumnosFormController sceneController = (AlumnosFormController) fxmlLoader.getController();
+            //seteamos los parametros.
+            sceneController.setMode(mode);
+            sceneController.setAlumno(cuenta);
+            sceneController.setVIEW();
+            
+            App.loadFXMLModal(scene);
+            
+            this.updateTable();
         } catch(IOException ex){
             System.out.println(ex.getMessage());
         }
@@ -90,14 +125,17 @@ public class AlumnosListController implements Initializable {
 
     @FXML
     private void edit_onclick(ActionEvent event) {
+        this.updateForm("upd");
     }
 
     @FXML
     private void display_onclick(ActionEvent event) {
+        this.updateForm("dsp");
     }
 
     @FXML
     private void delete_onclick(ActionEvent event) {
+        this.updateForm("del");
     }
     
 }

@@ -96,7 +96,7 @@ public class AlumnosDao {
     
     public int updateAlumnoItem(Alumnos ItemToUpdate) {
         try {
-            String SQLUpdate = "UPDATE MUSICA set NOMBRE=?, CORREO=?, GENERO=?, TELEFONO=? where CUENTA=?;";
+            String SQLUpdate = "UPDATE ALUMNOS set NOMBRE=?, CORREO=?, GENERO=?, TELEFONO=? where CUENTA=?;";
             PreparedStatement comando = Conexion.getConexion().prepareStatement(SQLUpdate);
             
             comando.setString(1, ItemToUpdate.getNombre());

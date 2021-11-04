@@ -6,6 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Modality;
+import javafx.fxml.Initializable;
+        
+        
+        
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -33,13 +37,24 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
+ 
 
     public static void main(String[] args) {
         launch();
     }
     
-    public static void loadFXMLModal(String fxml) throws IOException {
-        modalScene = new Scene(loadFXML(fxml), 480,480);
+    /*
+        1) Primero Cargagar el Loader con el nombre del fxml
+        2) En controlador que lo llama extraer el Parent y el Controller
+        3) Establecer los parametros en el controler adecuados
+        4) Llamar a loadFXMLModal enviando el Parent
+    */
+    public static FXMLLoader getFXMLLoader(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader;
+    }
+    public static void loadFXMLModal(Parent fxmlToShow) throws IOException {
+        modalScene = new Scene(fxmlToShow, 480,480);
         Stage modalStage = new Stage();
         modalStage.initModality(Modality.APPLICATION_MODAL);
         modalStage.setScene(modalScene);
